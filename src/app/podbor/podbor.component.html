@@ -1,0 +1,23 @@
+<div class="podbormain">
+  <div>
+    <p>Выбирите профильный предмет и введите суммарный балл ЕГЭ за все предметы:</p>
+    <select class="pselect" [(ngModel)]="searchSubj" placeholder="Выбирите предмет">
+      <option>Физика</option>
+      <option>Информатка</option>
+      <option>Физика и информатика</option>
+    </select>
+    <input class="pinput" [(ngModel)]="searchPoint" placeholder="Суммарный балл">
+    <button class="btn" (click)="search()">ПОИСК <img src="https://www.htmlcssbuttongenerator.com/iconExample-search-thin.svg" style="width:20px; margin-left:3px; margin-right:3px; flex-direction: row;"></button>
+  </div>
+  <h3><b>Направления, на которые вы могли бы поступить в прошлом году <br>
+    и направления, где вам не хватило бы нескольких баллов:</b></h3><br>
+  
+    <h5>Направления, на которых есть ДВИ промечены знаком "<b>*</b>"</h5>
+
+  
+  <div class="result" *ngFor="let vuz of vuzList" class="result">
+    <p><b>{{ vuz.vuzname }}</b></p>
+    <p>Профильный предмет: {{ vuz.subj }}</p>
+    <p>Проходной балл: {{ vuz.point }}</p>
+  </div>
+</div>
