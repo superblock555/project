@@ -15,9 +15,24 @@
     <h5>Направления, на которых есть ДВИ промечены знаком "<b>*</b>"</h5>
 
   
-  <div class="result" *ngFor="let vuz of vuzList" class="result">
-    <p><b>{{ vuz.vuzname }}</b></p>
-    <p>Профильный предмет: {{ vuz.subj }}</p>
-    <p>Проходной балл: {{ vuz.point }}</p>
+
+
+  <div *ngIf="isLoading">
+    <p>Ищем....</p>
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
   </div>
+  <div *ngIf="!isLoading && vuzList.length != 0">
+    <p>Нашлось <span class="success">{{vuzList.length }}</span> направлений по вашему запросу</p>
+  </div>
+  <div *ngIf="!isLoading && vuzList.length == 0">
+    <p><span class="fail">По вашему запросу не найденно подходящих направлений.</span></p>
+  </div>
+  <div *ngIf="!isLoading">
+    <div class="result"  *ngFor="let vuz of vuzList" class="result">
+      <p><b>{{ vuz.vuzname }}</b></p>
+      <p>Профильный предмет: {{ vuz.subj }}</p>
+      <p>Проходной балл: {{ vuz.point }}</p>
+    </div>
+    </div>
+    
 </div>

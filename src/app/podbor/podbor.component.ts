@@ -8,6 +8,7 @@ import { VuzComponent } from '../vuz/vuz.component';
   styleUrls: ['./podbor.component.css']
 })
 export class PodborComponent implements OnInit {
+  isLoading = false;
 
   searchSubj: string = "";
   searchPoint: number = 0;
@@ -16,22 +17,31 @@ export class PodborComponent implements OnInit {
   constructor(private vuzService: VuzService) { this.vuzList = this.vuzService.getVuzes(); }
 
   ngOnInit(): void {
-    
+
   }
 
   search() {
     console.log(this.searchSubj);
     console.log(this.searchPoint);
-    console.log()
-    this.vuzList = this.vuzService.getVuzes().filter(vuz => {
-      return vuz.subj === this.searchSubj && vuz.point <= this.searchPoint - 5;
-    }).sort((a,b)=> {
-      if(a.point > b.point) 
-        return -1;
-      if(a.point < b.point) 
+    console.log();
+
+    this.isLoading = true
+
+    setTimeout(() => {
+      this.isLoading = false;
+      this.vuzList = this.vuzService.getVuzes().filter(vuz => {
+        return vuz.subj === this.searchSubj && vuz.point <= this.searchPoint - 5;
+      }).sort((a, b) => {
+        if (a.point > b.point)
+          return -1;
+        if (a.point < b.point)
           return 1;
-      return 0;
-    });
+        return 0;
+      });
+    }, 1000);
+
+
+
   }
 
 }
